@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>إلى سارتي ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --g1: #2a0815;
+  --g2: #4a0e22;
+  --g3: #751433;
+  --card: rgba(255, 255, 255, 0.08);
+  --line: rgba(255, 255, 255, 0.15);
+  --tx: #fff0f5;
+  --ac: #ff6b8b;
+  --ac2: #ff9a9e;
+  box-sizing: border-box;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { 
+  margin: 0; font-family: 'Tajawal', sans-serif; color: var(--tx); 
+  background: linear-gradient(160deg, var(--g1), var(--g2) 55%, var(--g3)) fixed; 
+  line-height: 1.9; overflow-x: hidden; font-size: 1.1rem; 
+}
+section { max-width: 600px; margin: 0 auto; padding: 50px 20px; text-align: center; }
+h1 { font-size: clamp(2.2rem, 9vw, 3.5rem); margin: .2em 0; line-height: 1.35; }
+h2 { font-size: clamp(1.4rem, 6vw, 1.8rem); color: var(--ac2); margin: 0 0 .7em; line-height: 1.5; }
+.sub { opacity: 0.88; font-size: 1.15rem; }
+.glow { 
+  background: linear-gradient(90deg, var(--ac), var(--ac2), #ffc3a0); 
+  -webkit-background-clip: text; background-clip: text; color: transparent; 
+}
+.card { 
+  background: var(--card); border: 1px solid var(--line); 
+  border-radius: 22px; padding: 24px; 
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+.rv { opacity: 0; transform: translateY(25px) scale(0.98); transition: all 1s cubic-bezier(0.25, 0.8, 0.25, 1); }
+.rv.in { opacity: 1; transform: none; }
+.frame { position: relative; width: min(75%, 300px); margin: 20px auto 30px; }
+.frame:before { 
+  content: ""; position: absolute; inset: -15px; border-radius: 40px; 
+  background: radial-gradient(closest-side, rgba(255,107,139,0.5), transparent); 
+  filter: blur(15px); z-index: 0; animation: pulse 3s infinite alternate;
+}
+@keyframes pulse { from { transform: scale(1); opacity: 0.7; } to { transform: scale(1.05); opacity: 1; } }
+.frame img { 
+  position: relative; z-index: 1; display: block; width: 100%; aspect-ratio: 4/5; 
+  object-fit: cover; border-radius: 28px; border: 3px solid rgba(255,255,255,.4); 
+  box-shadow: 0 15px 40px rgba(0,0,0,.4); 
+}
+.photo.in .frame img { animation: pop 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+@keyframes pop { from { opacity: 0; transform: scale(0.85) rotate(-5deg); } to { opacity: 1; transform: none; } }
+.letter { text-align: right; font-size: 1.15rem; }
+.letter p { margin: .6em 0 1.2em; }
+.names-grid { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 20px; }
+.name-tag { 
+  background: rgba(255, 107, 139, 0.15); border: 1px solid rgba(255, 107, 139, 0.4); 
+  padding: 10px 20px; border-radius: 99px; font-weight: 700; color: #fff; 
+  opacity: 0; transform: scale(0.8); transition: 0.6s; 
+}
+.name-tag.in { opacity: 1; transform: none; }
+button { 
+  font: inherit; font-weight: 700; color: #3a0815; 
+  background: linear-gradient(90deg, var(--ac), var(--ac2)); 
+  border: 0; border-radius: 99px; padding: 16px 32px; font-size: 1.15rem; 
+  cursor: pointer; box-shadow: 0 8px 24px rgba(255,107,139,.35); 
+  transition: transform .2s, box-shadow .2s; -webkit-tap-highlight-color: transparent; 
+  width: 100%; max-width: 300px; margin: 0 auto;
+}
+button:active { transform: scale(0.95); }
+#interactive { min-height: 280px; position: relative; margin-top: 40px; }
+.btn-choice { transition: 0.3s; }
+#btn-no { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3); box-shadow: none; }
+#btn-yes { background: linear-gradient(90deg, #56ab2f, #a8e063); color: #0a2e05; }
+#btn-container { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; align-items: center; }
+#fin { 
+  position: fixed; inset: 0; z-index: 20; display: none; align-items: center; 
+  justify-content: center; flex-direction: column; background: #1a050f; 
+  padding: 24px; text-align: center; 
+}
+#fin.on { display: flex; }
+#ft { font-size: clamp(1.4rem, 7vw, 2.2rem); max-width: 550px; min-height: 4.5em; opacity: 0; transition: opacity 1.5s; line-height: 1.6; }
+#ft.show { opacity: 1; }
+#end { display: none; position: relative; z-index: 2; }
+#end h1 { font-size: clamp(1.8rem, 8vw, 3.5rem); }
+#x { position: absolute; top: 20px; left: 20px; display: none; background: var(--card); color: var(--tx); box-shadow: none; padding: 8px 16px; z-index: 3; width: auto;}
+canvas { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 30; }
+footer { padding: 30px; text-align: center; opacity: .6; font-size: 0.95rem; }
+@media (prefers-reduced-motion: reduce) { 
+  * { animation: none !important; transition: none !important; } 
+  .rv, .name-tag { opacity: 1; transform: none; } 
+}
+</style>
+</head>
+<body>
+<canvas id="cv"></canvas>
+
+<section id="hero">
+  <div style="font-size:3rem; margin-bottom:10px; animation: pulse 2s infinite">🤍✨</div>
+  <h1 class="glow">إلى قمري... سارتي</h1>
+  <p class="sub">بعرف إنك زعلانة مني، بس مستحيل يهون عليّ زعلك... نزلي الشاشة لتحت شوي، في أشياء حلوا بتستناكي من قلبي إلك. 👇</p>
+</section>
+
+<section class="photo rv" id="ph">
+  <div class="frame"><img src="sarah.jpg" alt="صورة سارة" id="pi" decoding="async"></div>
+  <p class="sub">صاحبة العيون الحلوة اللي ما بليق فيها الزعل أبداً. ❤️</p>
+</section>
+
+<section>
+  <h2 class="rv">أنتِ مش بس سارة... ✨</h2>
+  <p class="rv sub">أنتِ كل هدول، وأكتر بكثير:</p>
+  <div class="names-grid">
+    <div class="name-tag">سارتي 🤍</div>
+    <div class="name-tag">طفلتي 🧸</div>
+    <div class="name-tag">سوستي 🌸</div>
+    <div class="name-tag">زغلولتي 🕊️</div>
+    <div class="name-tag">بطبوطتي 🐥</div>
+    <div class="name-tag">عسولتي 🍯</div>
+    <div class="name-tag">ملاكي 👼</div>
+    <div class="name-tag">بنوتي 🎀</div>
+  </div>
+</section>
+
+<section>
+  <h2 class="rv">إلى قارئتي... 📚❤️</h2>
+  <div class="card letter rv">
+    <p>بين كل الروايات اللي بتقرئيها، والقصص اللي بتعيشي بين سطورها، بدي إياكِ تعرفي إنكِ <b>أجمل قصة</b> انكتبت بحياتي.</p>
+    <p>عيونك لحالهم قصيدة، وضحكتك هي الخاتمة السعيدة لكل يوم متعب بمر عليّ.</p>
+    <p>أنا آسف إذا زعلتك، بس تأكدي إنك بطلة روايتي، وما في بطلة بتزعل وحبيبها موجود.</p>
+  </div>
+</section>
+
+<section id="interactive" class="rv">
+  <div class="card" id="game-card">
+    <h2 id="q-text" style="font-size:1.5rem; margin-bottom:10px;">سؤال صريح... لسا زعلانة؟ 👀</h2>
+    <div id="btn-container">
+      <button class="btn-choice" id="btn-yes">سامحتك يا عيوني ❤️</button>
+      <button class="btn-choice" id="btn-no">آه لسا زعلانة 😤</button>
+    </div>
+    <div id="msg-after" style="display:none; text-align:center;">
+      <h2 style="font-size:1.6rem; color:var(--ac2); margin-bottom:10px;">كنت عارف! 🥰</h2>
+      <p style="font-size:1.2rem; margin-bottom:0;">أحن قلب بالدنيا، بحبك يا بطبوطتي!</p>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top:20px;">
+  <p class="msg rv">عشان نتأكد إن الصلحة تمت رسمياً... اضغطي هان 🌷</p>
+  <button id="go" class="rv">المفاجأة الأخيرة 💌</button>
+</section>
+
+<footer> لعيون سارتي 🥹❤️</footer>
+
+<div id="fin">
+  <button id="x">إغلاق</button>
+  <div id="ft"></div>
+  <div id="end">
+    <h1 class="glow">أحبكِ جداً يكتكوتي  ❤️</h1>
+    <p style="font-size:1.35rem; margin:.6em 0 1em; color:#ffc3a0;">يا طفلتي، وقارئتي، وكل أشيائي الحلوة</p>
+    <p class="sub" style="font-size:1.1rem;">ولا عاش اللي يزعلك مرة تانية.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+// غيّر اسم الصورة هنا لاسم صورة سارة
+var PHOTO = "sara.jpg"; 
+var pi = document.getElementById("pi");
+if(pi) { 
+  pi.onerror = function(){ document.getElementById("ph").style.display="none"; }; 
+  pi.src = PHOTO; 
+}
+
+var $ = function(i){ return document.getElementById(i); };
+var all = function(s){ return document.querySelectorAll(s); };
+var RM = window.matchMedia && window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+
+// Canvas Animation (Hearts & Sparkles)
+var cv = $("cv"), cx = cv.getContext("2d"), P = [], run = false;
+var emojis = ["❤️", "💖", "🌸", "✨", "🤍"];
+function size(){ cv.width = innerWidth; cv.height = innerHeight; }
+size(); addEventListener("resize", size);
+
+function rainLove(n){
+  n = RM ? Math.round(n/4) : n;
+  for(var i=0; i<n; i++) {
+    P.push({
+      t: emojis[Math.floor(Math.random() * emojis.length)],
+      x: Math.random() * cv.width,
+      y: -20 - Math.random() * cv.height * 0.5,
+      vx: Math.random() * 2 - 1,
+      vy: 2 + Math.random() * 3,
+      s: 15 + Math.random() * 20,
+      a: Math.random() * Math.PI * 2,
+      va: (Math.random() - 0.5) * 0.1,
+      l: 400
+    });
+  }
+  go();
+}
+
+function firework(){
+  var x = cv.width * (0.2 + Math.random() * 0.6), y = cv.height * (0.2 + Math.random() * 0.4);
+  for(var i=0; i<40; i++){
+    var a = Math.PI * 2 * i / 40, v = 2 + Math.random() * 4;
+    P.push({
+      t: "❤️", x: x, y: y, vx: Math.cos(a) * v, vy: Math.sin(a) * v,
+      s: 10 + Math.random() * 15, a: 0, va: 0, l: 80
+    });
+  }
+  go();
+}
+
+function go(){ if(!run){ run = true; requestAnimationFrame(fr); } }
+function fr(){
+  cx.clearRect(0, 0, cv.width, cv.height);
+  P = P.filter(function(p){ return p.l > 0 && p.y < cv.height + 30; });
+  P.forEach(function(p){
+    p.l--; p.x += p.vx; p.y += p.vy; p.vy += 0.03; p.a += p.va;
+    cx.globalAlpha = Math.max(p.l / 80, 0);
+    cx.font = p.s + "px Arial";
+    cx.save();
+    cx.translate(p.x, p.y);
+    cx.rotate(p.a);
+    cx.fillText(p.t, -p.s/2, p.s/2);
+    cx.restore();
+  });
+  if(P.length) requestAnimationFrame(fr); else { run = false; cx.clearRect(0,0,cv.width,cv.height); }
+}
+
+// Scroll Reveal
+var io = new IntersectionObserver(function(es){
+  es.forEach(function(e){
+    if(!e.isIntersecting) return;
+    var el = e.target; io.unobserve(el);
+    var sib = [].filter.call(el.parentNode.children, function(c){ return c.classList.contains(el.classList[0]); });
+    var d = (el.classList.contains("name-tag")) ? Math.max(sib.indexOf(el), 0) * 150 : 0;
+    setTimeout(function(){ el.classList.add("in"); }, RM ? 0 : d);
+  });
+}, { threshold: 0.3 });
+all(".rv, .name-tag").forEach(function(e){ io.observe(e); });
+
+// Interactive Button Logic (Mobile Friendly Negotiation)
+var qText = $("q-text"), btnYes = $("btn-yes"), btnNo = $("btn-no"), 
+    msgAfter = $("msg-after"), btnContainer = $("btn-container");
+
+var clickCount = 0;
+var stages = [
+  { q: "متأكدة؟ طيب فكري شوي... 🥺", yes " خلص رضيت", no: "لا، لسا زعلانة!" },
+  { q: "عشاني؟ يهون عليكِ تزعليني؟ 🥺❤️", yes: "مستحيل يهون", no: "ممكن يهون 😒" },
+  { q: "طيب لو قلتلك إني بحبك قد الدنيا؟ 🥰", yes: "وأنا كمان 🤍", no: "برضه زعلانة 😤" },
+  { q: "الظاهر الزعل مطول... بس أنا مش حستسلم! 😭", yes: "سامحتك وأمري لله 🤷‍♀️", no: "أوك سامحتك غصب عني 😭" }
+];
+
+function win() {
+  btnContainer.style.display = "none";
+  qText.style.display = "none";
+  msgAfter.style.display = "block";
+  rainLove(150);
+}
+
+btnYes.onclick = function(e) {
+  e.preventDefault();
+  win();
+};
+
+btnNo.onclick = function(e) {
+  e.preventDefault();
+  if (clickCount < stages.length) {
+    qText.textContent = stages[clickCount].q;
+    btnYes.textContent = stages[clickCount].yes;
+    btnNo.textContent = stages[clickCount].no;
+    
+    // في المرحلة الأخيرة، كلا الزرين سيؤديان إلى الموافقة "سامحتك"
+    if (clickCount === stages.length - 1) {
+      btnNo.onclick = function(e) {
+        e.preventDefault();
+        win();
+      };
+      // تغيير لون زر "الرفض" في النهاية ليوحي بأنه أصبح إيجابياً
+      btnNo.style.background = "linear-gradient(90deg, var(--ac), var(--ac2))";
+      btnNo.style.color = "#3a0815";
+      btnNo.style.border = "none";
+    }
+    clickCount++;
+  }
+};
+
+// Final Surprise Sequence
+var tm = [], fw;
+function later(f, ms){ tm.push(setTimeout(f, ms)); }
+function say(t, ms){ 
+  later(function(){ 
+    var f = $("ft"); f.classList.remove("show"); 
+    setTimeout(function(){ f.innerHTML = t; f.classList.add("show"); }, RM ? 0 : 800); 
+  }, ms); 
+}
+
+$("go").onclick = function(){
+  $("fin").classList.add("on"); $("end").style.display = "none"; $("x").style.display = "none"; 
+  $("ft").style.display = "block"; $("ft").textContent = ""; $("ft").classList.remove("show");
+  
+  say("بعرف إني مرات بكون مزعج...", 500);
+  say("بس أنا مهووس بحبك.", 4000);
+  say("أنتِ مش بس حبيبتي...", 7500);
+  say("أنتِ <span style='color:var(--ac2)'>عائلتي</span>، وقارئتي، وكل دنيتي.", 11000);
+  say("حقك عليّ يا عيون حبيبك ❤️", 15500);
+  
+  later(function(){
+    $("ft").style.display = "none"; $("end").style.display = "block"; $("x").style.display = "block";
+    rainLove(200); firework();
+    if(!RM) fw = setInterval(firework, 1500);
+  }, 20000);
+};
+
+$("x").onclick = function(){
+  tm.forEach(clearTimeout); tm = []; clearInterval(fw);
+  $("fin").classList.remove("on"); $("x").style.display = "none";
+};
+
+})();
+</script>
+</body>
+</html>
